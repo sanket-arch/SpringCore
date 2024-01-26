@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean class="com.springcore.constructorinjection.Certification" name="certi">
+        <constructor-arg value="Java" />
+    </bean>
+
+    <!-- 
+        IMPORTANT: To describe the order in which we want to inject the value in constructor,
+                   we can use index attribute inside constructor-arg (index start with 0)
+     -->
+    <bean class="com.springcore.constructorinjection.Person" name="person">
+
+        <constructor-arg value="sanket" />
+        <!-- 
+            It is optional to give type parameter 
+            But it is good practice to avoid any ambiguity in case of constructor overloading            
+        -->
+        <!-- 
+            NOTE: By default spring will consider value as string
+         -->
+        <constructor-arg value="10" type="int" />
+
+        <!-- In case of reference type -->
+        <constructor-arg ref="certi" />
+
+        <!-- In case of container data type -->
+        <constructor-arg>
+            <list>
+                <value>"8709687535"</value>
+                <value>"9709687565"</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+</beans>
